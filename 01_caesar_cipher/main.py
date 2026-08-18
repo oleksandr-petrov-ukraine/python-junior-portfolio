@@ -12,3 +12,12 @@ def caesar_cipher(text, shift):
         result += alphabet[new_char_index].upper() if char.isupper() else alphabet[new_char_index]
 
     return result
+
+while True:
+    try:
+        shift = int(input('Enter shift (must be an integer): '))
+        shift = shift % 26  # normalize shift
+        break
+    except ValueError:
+        print('Shift must be an integer')
+
