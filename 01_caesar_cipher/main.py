@@ -2,18 +2,21 @@ def get_shift():
     while True:
         try:
             shift = int(input('Enter shift (must be an integer): '))
-            shift %= 26  # normalize shift
-            return shift
         except ValueError:
             print('Shift must be an integer')
+            continue
+
+        if shift < 0:
+            print("Shift can't be negative")
+            continue
+        return shift % 26
 
 def get_mode():
     while True:
         try:
             mode = int(input('Enter mode (0 - encrypt, 1 - decrypt): '))
             if mode not in (0, 1):
-                print('Mode must be 0 or 1')
-                continue
+                raise ValueError('Mode must be 0 or 1')
             return mode
         except ValueError:
             print('Mode must be an integer')
