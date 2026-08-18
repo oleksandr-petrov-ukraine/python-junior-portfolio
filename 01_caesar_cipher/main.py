@@ -7,7 +7,7 @@ def get_shift():
         except ValueError:
             print('Shift must be an integer')
 
-def caesar_cipher(text, shift):
+def caesar_cipher(text, shift, mode):
     alphabet = 'abcdefghijklmnopqrstuvwxyz'
     result = ''
 
@@ -17,11 +17,22 @@ def caesar_cipher(text, shift):
             continue
 
         char_index = alphabet.find(char.lower())
-        new_char_index = (char_index + shift) % len(alphabet)
+        new_char_index = (char_index + shift) % len(alphabet) if mode == 0 else (char_index - shift) % len(alphabet)
         result += alphabet[new_char_index].upper() if char.isupper() else alphabet[new_char_index]
 
     return result
 
 text = input('Enter text: ')
+
+while True:
+    try:
+        mode = int(input('Enter mode (0 - encrypt, 1 - decrypt): '))
+        if mode not in (0, 1):
+            print('Mode must be 0 or 1')
+            continue
+        break
+    except ValueError:
+        print('Mode must be an integer')
+
 shift = get_shift()
-print(caesar_cipher(text, shift))
+print(caesar_cipher(text, shift, mode))
