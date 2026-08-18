@@ -1,3 +1,12 @@
+def get_shift():
+    while True:
+        try:
+            shift = int(input('Enter shift (must be an integer): '))
+            shift %= 26  # normalize shift
+            return shift
+        except ValueError:
+            print('Shift must be an integer')
+
 def caesar_cipher(text, shift):
     alphabet = 'abcdefghijklmnopqrstuvwxyz'
     result = ''
@@ -13,11 +22,6 @@ def caesar_cipher(text, shift):
 
     return result
 
-while True:
-    try:
-        shift = int(input('Enter shift (must be an integer): '))
-        shift = shift % 26  # normalize shift
-        break
-    except ValueError:
-        print('Shift must be an integer')
-
+text = input('Enter text: ')
+shift = get_shift()
+print(caesar_cipher(text, shift))
